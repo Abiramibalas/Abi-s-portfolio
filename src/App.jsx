@@ -1,4 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
+import Chatbot from './Chatbot';
+import Freelakhs from './Freelakhs';
 
 const navLinks = [
   { id: 'home', label: 'Home' },
@@ -178,6 +180,8 @@ const experienceItems = [
 ];
 
 function App() {
+  if (window.location.pathname === '/freelakhs') return <Freelakhs />;
+
   const [theme, setTheme] = useState('dark');
   const [typedLines, setTypedLines] = useState([]);
   const [currentText, setCurrentText] = useState('');
@@ -273,7 +277,7 @@ function App() {
       <Experience />
       <Contact />
       <footer>© 2026 Abirami - Built with clarity, curiosity, and polished engineering.</footer>
-      <PortfolioBot />
+      <Chatbot />
       <CustomCursor />
     </div>
   );
@@ -557,6 +561,7 @@ function NavBar({ theme, onToggleTheme }) {
             <a href={`#${link.id}`}>{link.label}</a>
           </li>
         ))}
+        <li><a href="/freelakhs">Freelakhs</a></li>
       </ul>
       <div className="nav-actions">
         <button className={`theme-switch ${theme === 'light' ? 'is-light' : ''}`} onClick={onToggleTheme} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`} title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}>
