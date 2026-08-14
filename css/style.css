@@ -676,6 +676,37 @@ footer {
   }
 }
 
+/* Phone layout */
+@media (max-width: 760px) {
+  nav{padding:14px 5%;}
+  .nav-actions{gap:8px;}
+  .nav-cta{padding:9px 12px;font-size:.72rem;}
+  .theme-switch{width:62px;height:34px;}
+  .theme-switch .theme-knob{width:26px;height:26px;top:4px;left:4px;}
+  .theme-switch.is-light .theme-knob{transform:translateX(28px);}
+  .theme-switch .theme-sun{font-size:21px;top:5px;left:8px;}
+  .theme-switch .theme-cloud{font-size:19px;right:6px;bottom:4px;}
+  section{padding:78px 6%;}
+  .hero{min-height:auto;padding:114px 6% 70px;}
+  .hero-grid{grid-template-columns:1fr;gap:34px;}
+  h1.hero-title{font-size:clamp(2.7rem,14vw,4rem);}
+  .hero-sub{font-size:1rem;line-height:1.7;}
+  .hero-actions{margin-top:28px;gap:10px;}
+  .hero-actions .btn{padding:12px 16px;font-size:.76rem;}
+  .status-card{padding:22px;max-width:100%;}
+  .about-overview{grid-template-columns:repeat(2,1fr);gap:10px;}
+  .about-grid{grid-template-columns:1fr;gap:28px;}
+  .sec-head{margin-bottom:35px;}
+  .project-demo{grid-template-columns:1fr;gap:18px;padding:15px;}
+  .demo-body{min-height:225px;padding:21px;}
+  .resume-preview{grid-template-columns:1fr;padding:24px;}
+  .resume-download{justify-self:start;}
+  .contact-box{padding:42px 22px;}
+  .contact-links{align-items:stretch;gap:10px;margin-top:26px;}
+  .contact-links .btn{justify-content:center;width:100%;}
+  footer{padding:25px 6%;line-height:1.6;}
+}
+
 /* Floating portfolio guide */
 .portfolio-bot{
   position:fixed; right:26px; bottom:24px; z-index:80;
