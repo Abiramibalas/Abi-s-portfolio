@@ -91,6 +91,7 @@ body.light .navlinks a:hover{color:#0F172A;}
   transition:.3s;
 }
 .navlinks a:hover::after{width:100%;}
+.nav-panel{display:flex; align-items:center;}
 .nav-cta{
   font-family:var(--mono); font-size:.82rem; font-weight:600; color:var(--ink);
   background:var(--amber); padding:9px 18px; border-radius:6px; text-decoration:none;
@@ -115,7 +116,26 @@ body:not(.light) .theme-switch{background:#1d2b4c;}
 body:not(.light) .theme-switch .theme-sun{opacity:.55;}
 body:not(.light) .theme-switch .theme-cloud{color:#cfd9ff;}
 body:not(.light) .theme-switch .theme-knob{background:#b9c8ff;}
-@media (max-width:840px){.navlinks{display:none;}}
+.mobile-menu-toggle{display:none; align-items:center; justify-content:center; flex-direction:column; gap:5px; width:42px; height:42px; border:1px solid var(--line); border-radius:10px; background:rgba(148,163,184,.06); cursor:pointer;}
+.mobile-menu-toggle span{display:block; width:18px; height:2px; background:var(--text); border-radius:2px; transition:.25s;}
+nav.nav-open .mobile-menu-toggle span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+nav.nav-open .mobile-menu-toggle span:nth-child(2){opacity:0;}
+nav.nav-open .mobile-menu-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+@media (max-width:840px){
+  nav{justify-content:flex-end; gap:10px; padding-right:5%;}
+  .logo{margin-right:auto;}
+  .nav-panel{width:100%; order:4; position:absolute; right:5%; left:5%; top:calc(100% + 10px);}
+  .navlinks{display:none; flex-direction:column; width:100%; gap:18px; padding:18px 16px; margin-top:0; border:1px solid var(--line); border-radius:12px; background:rgba(11,15,25,.8);}
+  .navlinks.is-open{display:flex;}
+  .navlinks a{font-size:.95rem;}
+  .navlinks a::after{display:none;}
+  .mobile-menu-toggle{display:flex; order:3; margin-left:0;}
+  .nav-actions{order:2; margin-left:0; gap:8px;}
+  .theme-switch{width:62px; height:34px;}
+  .theme-switch .theme-knob{width:26px; height:26px; top:4px; left:4px;}
+  .theme-switch.is-light .theme-knob{transform:translateX(28px);}
+  .nav-cta{padding:8px 12px; font-size:.72rem;}
+}
 
 /* HERO */
 .hero{

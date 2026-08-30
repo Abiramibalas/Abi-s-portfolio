@@ -188,6 +188,7 @@ function App() {
   const [step, setStep] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
   const [profileMode, setProfileMode] = useState(profileModes[0].id);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     if ('scrollRestoration' in window.history) {
@@ -200,6 +201,15 @@ function App() {
   useEffect(() => {
     document.body.className = theme;
   }, [theme]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 840) setIsMobileMenuOpen(false);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     if (step >= heroLines.length) return;
@@ -266,7 +276,12 @@ function App() {
 
   return (
     <div className="wrap">
-      <NavBar theme={theme} onToggleTheme={() => setTheme(theme === 'dark' ? 'light' : 'dark')} />
+      <NavBar
+        theme={theme}
+        onToggleTheme={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+        isMobileMenuOpen={isMobileMenuOpen}
+        setIsMobileMenuOpen={setIsMobileMenuOpen}
+      />
       <Hero typedLines={typedLines} currentText={currentText} step={step} />
       <About activeProfile={activeProfile} profileMode={profileMode} setProfileMode={setProfileMode} />
       <Skills />
@@ -551,25 +566,40 @@ function CustomCursor() {
   );
 }
 
-function NavBar({ theme, onToggleTheme }) {
+function NavBar({ theme, onToggleTheme, isMobileMenuOpen, setIsMobileMenuOpen }) {
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
+
   return (
-    <nav>
+    <nav className={isMobileMenuOpen ? 'nav-open' : ''}>
       <a href="#home" className="logo">AB<span>.</span></a>
-      <ul className="navlinks">
-        {navLinks.map((link) => (
-          <li key={link.id}>
-            <a href={`#${link.id}`}>{link.label}</a>
-          </li>
-        ))}
-        <li><a href="/freelakhs">Freelakhs</a></li>
-      </ul>
+      <button
+        type="button"
+        className="mobile-menu-toggle"
+        aria-label="Toggle navigation menu"
+        aria-expanded={isMobileMenuOpen}
+        onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+      >
+        <span />
+        <span />
+        <span />
+      </button>
+      <div className="nav-panel">
+        <ul className={`navlinks ${isMobileMenuOpen ? 'is-open' : ''}`}>
+          {navLinks.map((link) => (
+            <li key={link.id}>
+              <a href={`#${link.id}`} onClick={closeMobileMenu}>{link.label}</a>
+            </li>
+          ))}
+          <li><a href="/freelakhs" onClick={closeMobileMenu}>Freelakhs</a></li>
+        </ul>
+      </div>
       <div className="nav-actions">
         <button className={`theme-switch ${theme === 'light' ? 'is-light' : ''}`} onClick={onToggleTheme} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`} title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}>
           <span className="theme-sun">☀</span>
           <span className="theme-cloud">☁</span>
           <span className="theme-knob" />
         </button>
-        <a href="#contact" className="nav-cta">Hire Me</a>
+        <a href="#contact" className="nav-cta" onClick={closeMobileMenu}>Hire Me</a>
       </div>
     </nav>
   );
