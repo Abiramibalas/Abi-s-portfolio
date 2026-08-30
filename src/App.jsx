@@ -1,6 +1,10 @@
 import { useEffect, useState, useRef } from 'react';
 import Chatbot from './Chatbot';
-import Freelakhs from './Freelakhs';
+import Freelakhs from "./pages/Freelakhs";
+
+<Routes>
+  <Route path="/" element={<Home />} />
+</Routes>
 
 const navLinks = [
   { id: 'home', label: 'Home' },
